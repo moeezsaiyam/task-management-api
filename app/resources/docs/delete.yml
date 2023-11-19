@@ -1,0 +1,15 @@
+summary: Delete a single task
+description: Delete a single task by its ID
+tags:
+ - Tasks
+parameters:
+ - in: path
+   name: id
+   type: integer
+   required: true
+   description: The ID of the task to delete
+responses:
+ 200:
+   description: Task deleted successfully
+ 404:
+   description: Task not found

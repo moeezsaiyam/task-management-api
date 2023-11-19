@@ -1,0 +1,26 @@
+summary: Get a single task
+description: Retrieve a single task by its ID.
+tags:
+ - Tasks
+parameters:
+ - in: path
+   name: id
+   type: integer
+   required: true
+   description: The ID of the task
+responses:
+ 200:
+   description: A single task
+   schema:
+     id: Task
+     properties:
+       id:
+         type: integer
+       title:
+         type: string
+       description:
+         type: string
+       status:
+         type: string
+ 404:
+   description: Task not found

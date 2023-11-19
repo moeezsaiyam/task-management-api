@@ -1,0 +1,24 @@
+summary: Create a single task
+description: Create a single task
+tags:
+ - Tasks
+parameters:
+ - in: body
+   name: body
+   schema:
+     id: TaskToCreate
+     required:
+       - title
+     properties:
+       title:
+         type: string
+       description:
+         type: string
+       status:
+         type: string
+responses:
+ 201:
+   description: New task created
+   schema:
+     $ref: '#/definitions/Task'
+

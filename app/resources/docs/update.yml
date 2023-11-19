@@ -1,0 +1,30 @@
+summary: Update a single task
+description: Update a single task by its ID
+tags:
+ - Tasks
+parameters:
+ - in: path
+   name: id
+   type: integer
+   required: true
+   description: The ID of the task
+ - in: body
+   name: body
+   schema:
+     id: TaskToUpdate
+     required:
+       - title
+     properties:
+       title:
+         type: string
+       description:
+         type: string
+       status:
+         type: string
+responses:
+ 200:
+   description: Task updated successfully
+   schema:
+     $ref: '#/definitions/Task'
+ 404:
+   description: Task not found

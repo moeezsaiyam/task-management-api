@@ -1,0 +1,9 @@
+Flask~=3.0.0
+Flask-RESTful
+Flask-SQLAlchemy
+Flask-Migrate
+psycopg2-binary
+python-dotenv~=1.0.0
+flasgger~=0.9.7.1
+alembic~=1.12.1
+SQLAlchemy~=2.0.23

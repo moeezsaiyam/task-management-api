@@ -1,17 +1,35 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_restful import Api
-from flask_migrate import Migrate  # Import Flask-Migrate
-from dotenv import load_dotenv
 from .config import Config
+from flask_restful import Api
+from dotenv import load_dotenv
 from flasgger import Swagger
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 
+# LOAD ENVIRONMENT
 load_dotenv()
 
+# INIT FLASK APP -- START
 app = Flask(__name__)
 app.config.from_object(Config)
+# INIT FLASK APP -- END
 
+# INIT DB AND MIGRATIONS -- START
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)  # Initialize Flask-Migrate
+api = Api(app)
+# INIT DB AND MIGRATIONS -- START
+
+# IMPORT URLS -- START
+from .resources.task import TaskAPI
+from .resources.task_list import TaskListAPI
+
+api.add_resource(TaskListAPI, '/tasks')
+api.add_resource(TaskAPI, '/tasks/<int:id>')
+# IMPORT URLS -- END
+
+# INIT SWAGGER -- START
 swagger_config = {
     "headers": [
     ],
@@ -30,15 +48,5 @@ swagger_config = {
     "swagger_ui": True,
     "specs_route": "/"
 }
-
 Swagger(app, config=swagger_config)
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)  # Initialize Flask-Migrate
-api = Api(app)
-
-from .resources.task import Task
-from .resources.task_list import TaskList
-
-api.add_resource(TaskList, '/tasks')
-api.add_resource(Task, '/tasks/<int:id>')
+# INIT SWAGGER -- END

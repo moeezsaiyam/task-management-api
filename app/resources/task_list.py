@@ -4,7 +4,7 @@ from ..models import Task
 from .. import db
 
 
-class TaskList(Resource):
+class TaskListAPI(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('title', required=True, help="Title cannot be blank!")
     parser.add_argument('description')
@@ -17,7 +17,7 @@ class TaskList(Resource):
 
     @swag_from('docs/post.yml', methods=['POST'])
     def post(self):
-        data = TaskList.parser.parse_args()
+        data = TaskListAPI.parser.parse_args()
         task = Task(title=data['title'], description=data['description'], status=data['status'])
         db.session.add(task)
         db.session.commit()

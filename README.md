@@ -19,7 +19,11 @@ This is a task management API developed using Flask. It provides functionalities
 5. Set up the environment variables:
    - Copy `.env.example` to `.env`
    - Update the variables in `.env`
-6. Initialize the database:
+6. Setup Postgres Database:
+   - Create a database in postgres
+   - Update `DATABASE_URL=postgresql://user:password@localhost/db_name` in `.env` file
+   in .env file
+7. Initialize the database:
    - `flask db init`
    - `flask db migrate -m "first migration"`
    - `flask db upgrade`

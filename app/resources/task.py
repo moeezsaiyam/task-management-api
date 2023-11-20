@@ -4,7 +4,7 @@ from ..models import Task
 from .. import db
 
 
-class Task(Resource):
+class TaskAPI(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('title', required=True, help="Title cannot be blank!")
     parser.add_argument('description')
@@ -19,7 +19,7 @@ class Task(Resource):
 
     @swag_from('docs/update.yml', methods=['PUT'])
     def put(self, id):
-        data = Task.parser.parse_args()
+        data = TaskAPI.parser.parse_args()
         task = Task.query.get(id)
 
         if task:
